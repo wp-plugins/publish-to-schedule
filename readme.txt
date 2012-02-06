@@ -1,0 +1,107 @@
+=== Publish to Schedule ===
+Contributors: alexbenfica,flauius
+Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, 
+Requires at least: 2.8
+Tested up to: 3.3.1
+Stable tag: trunk
+Donate link: http://www.dowordpress.com.br/
+
+
+Write and not worry about scheduling posts, keeping the periodicity for your readers and not losing time finding out next date to publish. 
+
+
+== Description ==
+
+With this plugin you don't need to manually choose the date when a post will be publish. After make a simple configuration the plugin will schedule your posts when you click to publish.
+
+Just configure days of week and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than 1 post per day. 
+
+It is useful as readers will have articles with maintain some defined periodicity.
+
+Besides choose the day of week when you want posts published, you can set the time too. You might specify an interval in which you like posts to be scheduled. The plugin will choose a random time within this interval.
+
+In order to make things clear and let no doubts about why an specific data were chosen, the plugins shows some informations in the publish box. You can set up how much info you want to see there.
+
+It is very simple to use and avoid you to be searching when the last post were published each time you have to schedule a date to a post you are writing. 
+Specially useful if you have multiple blogs and each one have a different post schedule. 
+
+
+== Installation ==
+
+To install it simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin. 
+Settings can be acessible from WordPress settings menu or even from the plugins administration area.
+
+There you must define which days of week you want to have your posts schedule... and choose a time interval too, if you prefer.
+
+That's all. Now you'll see the plugin scheduled date and time each time you write a new post. Enjoy it!
+
+== Frequently Asked Questions ==
+
+
+= Why limit what times I publish? =
+
+It all depends on the purpose for your writing. 
+Some people would want to publish at any time, but if you want to set criteria this allows it. 
+If your target is a business audience you might want to publish during business hours (or days) - if you have a thought outside of business hours it will be held until the next business hours. 
+If you are publishing for late night gamers you might want to publish after regular business hours and late into the early morning.
+
+
+= How the plugin chooses the date to publish? =
+
+It starts in the present day and runs on future dates until find one day in a week in which settings to allow publication. 
+If this day have not published articles, the plugin will generate a random time in the interval time you set up in the configuration. 
+When you click Publish, the item will be scheduled. 
+
+= Can I bypass the plugin and publish any days I want? =
+
+Yes! Just choose an schedule date in the default WordPress scheduling controls and, when you click the Schedule button, the plugin will not act.
+Your post will bu publish in the date you choose. Simple and straightforward!  
+
+
+= How can this help with multiple authors? =
+
+The plugins is simple. It will schedule the post on the moment that publish button get clicked. 
+So, the author who writes first will have your post published first! Fair enough.. anh?
+
+
+= How does randomized publishing work? =
+
+The publish time will be random in the time interval you chose at configuration screen.
+
+
+= Can I publish overnight? =
+
+Not yet. But it is already on TODO list.
+
+
+= Can I ask for changes and new functionalities on this plugin? = 
+
+Yes. You can! I'm availble to talk about this! And I can do other plugins too.
+
+= Should I donate? =
+
+You can, if you want. I would like that. Means that my work e valuable for someone else!
+My paypal account for donations is: alexbenfica@gmail.com 
+
+= Can I translate it? =
+
+Yes! Please help translating to other languages.
+I am native in Brazilian Portuguese and do speak English, so I can take care of en->pt_BR.
+Any other languages... you're welcome! Thank you!
+
+
+== Screenshots ==
+
+1. Configuration to choose which day of week post can be scheduled. Will be only one post each day, unless you decide manually schedule any other for a day that already has a post.
+2. Set the period of day in which post may be scheduled. Simple like that.
+3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
+
+== Changelog ==
+
+Nothing to say here yet. 
+The plugin has being tested for a long time before I take some time to publish it here, and I was not actually tracking changes as it was only running locally in one or two blogs.
+Now... things changed!
+
+
+== Upgrade Notice ==
+Nothing here yet!
