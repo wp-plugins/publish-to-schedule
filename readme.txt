@@ -1,6 +1,6 @@
 === Publish to Schedule ===
 Contributors: alexbenfica,flauius
-Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, 
+Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
 Tested up to: 3.3.1
 Stable tag: trunk
