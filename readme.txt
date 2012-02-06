@@ -12,7 +12,7 @@ Write and not worry about scheduling posts, keeping the periodicity for your rea
 
 == Description ==
 
-With this plugin you don't need to manually choose the date when a post will be publish. After make a simple configuration the plugin will schedule your posts when you click to publish.
+With this plugin you don't need to manually choose the date when a post will be publish. After a simple configuration the plugin will schedule your posts when you click to published.
 
 Just configure days of week and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than 1 post per day. 
 
@@ -20,7 +20,8 @@ It is useful as readers will have articles with maintain some defined periodicit
 
 Besides choose the day of week when you want posts published, you can set the time too. You might specify an interval in which you like posts to be scheduled. The plugin will choose a random time within this interval.
 
-In order to make things clear and let no doubts about why an specific data were chosen, the plugins shows some informations in the publish box. You can set up how much info you want to see there.
+In order to make things clear and let no doubts about why an specific data were chosen, the plugins shows some informations in the publish box. You can set up how much info you want to see there. 
+This information is important as it allow you to manually change the date and time, if you have your reasons to.
 
 It is very simple to use and avoid you to be searching when the last post were published each time you have to schedule a date to a post you are writing. 
 Specially useful if you have multiple blogs and each one have a different post schedule. 
@@ -28,7 +29,7 @@ Specially useful if you have multiple blogs and each one have a different post s
 
 == Installation ==
 
-To install it simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin. 
+To install it, simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin. 
 Settings can be acessible from WordPress settings menu or even from the plugins administration area.
 
 There you must define which days of week you want to have your posts schedule... and choose a time interval too, if you prefer.
