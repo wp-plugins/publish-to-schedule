@@ -12,7 +12,7 @@ Write and not worry about scheduling posts, keeping the periodicity for your rea
 
 == Description ==
 
-With this plugin you don't need to manually choose the date when a post will be publish. After a simple configuration the plugin will schedule your posts when you click to published.
+With this plugin you don't need to manually choose the date when a post will be published. After a simple configuration the plugin will schedule your posts when you click publish.
 
 Just configure days of week and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than 1 post per day. 
 
