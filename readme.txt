@@ -27,6 +27,14 @@ It is very simple to use and avoid you to be searching when the last post were p
 Specially useful if you have multiple blogs and each one have a different post schedule. 
 
 
+Se preferir, veja a **documentação em português** do [plugin para WordPress Publish to Schedule][doc ptbr].
+
+[doc ptbr]: http://www.dowordpress.com.br/plugin-wordpress-para-agendar-artigos-automaticamente/
+            "Plugin WordPress Publish to Schedule - pt_BR"
+
+
+
+
 == Installation ==
 
 To install it, simply unzip the file linked above and save it in your plugins directory under wp-content. In the plugin manager activate the plugin. 
