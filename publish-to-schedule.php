@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 3.1.8
+Version: 3.1.9
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -166,37 +166,55 @@ function pts_insertAnalyticsCode($getCode = False){
 # creates a js function that will compare the cliet time with the server time, passed as variables...
 function pts_createJsToCompareTime($HTMLWrong,$HTMLOK){
 
+
 	$HTMLWrong = trim($HTMLWrong);
 	$HTMLOK = trim($HTMLOK);
-
-	$msServer = current_time('timestamp', $gmt = 0) * 1000;
 	
 	# minutes...
-	$maxAllowedDif = 15;
+	$maxAllowedDif = 20;	
 	
+	# seconds...
+	$phplocal = current_time('timestamp', $gmt = 0);	
+	
+	# minutes...
+	$phplocal = $phplocal / 60;
+	
+	# minutes in a day...
+	$phplocal = $phplocal % 1440;
 	
 	
 	$jsCT = '
 	
 	<script type="text/javascript">	
-	
-	function jsCompareTimes(){
 
-		
 	
-		d = new Date();		
-	
-		var msServer = '.$msServer.';		
-		var msLocal = d.getTime();
-		var maxDif = '.$maxAllowedDif.'*60*10000;  //'.$maxAllowedDif.' minutes! and it is a lot!
-		difference_in_milliseconds = Math.abs(msServer - msLocal);
+	function jsCompareTimes(){	
+		d = new Date();						
+		var currentHours = d.getHours();
+		var currentMinutes = d.getMinutes();
 		
-		if (difference_in_milliseconds > maxDif){
+		
+		
+		var jsLocal = currentHours*60 + currentMinutes;
+		var phpLocal = '.$phplocal.';
+		
+		var maxAllowedDif = '.$maxAllowedDif.';				
+		
+		difference_in_minutes = Math.abs(jsLocal - phpLocal);				
+		
+		//alert("diference: " + difference_in_minutes + "\nphpLocal:"+ phpLocal + "\n_jsLocal: "+ jsLocal);
+		
+		// ignores big differences as being 23 to 00 hour
+		if(difference_in_minutes > 60*12){
+			difference_in_minutes = 0;
+		}		
+			
+		if (difference_in_minutes > maxAllowedDif){
 			//alert("Server time is wrong");			
 			document.getElementById("divjsCT").innerHTML=\''.$HTMLWrong.'\';
 		}	
 		else{
-			//alert("Server time is OK! " + difference_in_milliseconds / 1000);
+			//alert("Server time is OK! " + difference_in_minutes);
 			document.getElementById("divjsCT").innerHTML=\''.$HTMLOK.'\';
 			
 		}
@@ -1208,7 +1226,7 @@ $options = get_option(basename(__FILE__, ".php"));
 	
 // Add settings link on plugin page
 function pts_settings_link($links) { 
-  $settings_link = '<a href="options-general.php?page=publish-to-schedule/publish-to-schedule.php">' . __('Settings','pts') .'</a>'; 
+  $settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">' . __('Settings','pts') .'</a>'; 
   array_unshift($links, $settings_link); 
   return $links; 
 } 

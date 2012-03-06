@@ -107,9 +107,14 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
-Nothing to say here yet. 
-The plugin has being tested for a long time before I take some time to publish it here, and I was not actually tracking changes as it was only running locally in one or two blogs.
-Now... things changed!
+= 3.1.9 =
+* Changed direct settings link to work from plugin administration even if the plugin is installed in a different folder under plugins directory.
+* Correct function that compare remote WordPress time with local time and displays a warning.
+
+= 3.1.8 = 
+* First public release.
+* The plugin has being tested for a long time before I take some time to publish it here, and I was not actually tracking changes as it was only running locally in one or two blogs.
+
 
 
 == Upgrade Notice ==
