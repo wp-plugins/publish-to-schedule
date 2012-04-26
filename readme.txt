@@ -4,7 +4,7 @@ Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admi
 Requires at least: 2.8
 Tested up to: 3.3.1
 Stable tag: trunk
-Donate link: http://www.dowordpress.com.br/
+Donate link: http://www.palpitedigital.com/colabore-donate/
 
 
 Write and not worry about scheduling posts, keeping the periodicity for your readers and not losing time finding out next date to publish. 
@@ -29,7 +29,7 @@ Specially useful if you have multiple blogs and each one have a different post s
 
 Se preferir, veja a **documentação em português** do [plugin para WordPress Publish to Schedule][doc ptbr].
 
-[doc ptbr]: http://www.dowordpress.com.br/plugin-wordpress-para-agendar-artigos-automaticamente/
+[doc ptbr]: http://goo.gl/y80h6
             "Plugin WordPress Publish to Schedule - pt_BR"
 
 
