@@ -107,6 +107,13 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 3.1.10 =
+
+* Tested with WordPress 3.4.1 and it is working fine!
+* If the post is being scheduled for the day that is being written, it is scheduled to be published 3 minutes after clicking the "Publish to schedule." It is obviously necessary that the time interval is allowed. This causes the post to be online as soon as possible, generating more revenue that day.
+
+
+
 = 3.1.9 =
 * Changed direct settings link to work from plugin administration even if the plugin is installed in a different folder under plugins directory.
 * Correct function that compare remote WordPress time with local time and displays a warning.
