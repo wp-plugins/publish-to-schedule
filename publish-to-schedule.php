@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 3.1.10
+Version: 3.1.11
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -440,18 +440,18 @@ function pts_findNextSlot($post,$changePost = False){
 	
 	
 	# dates from today...
-	$startDate = date(current_time('mysql', $gmt = 0));
+	$startDate = date('Ymd', strtotime(current_time('mysql', $gmt = 0)));
 	
 	
-	/*
-	if($pts_debug and False){
+	
+	if($pts_debug and True){
 		$msg .= 'DEBUG: $startDate = ' . $startDate . '<br>';
 	}
 	
-	if($pts_debug and False){
+	if($pts_debug and True){
 		$msg .= 'DEBUG: $options = ' . print_r($options,True) . '<br>';		
 	}
-	*/
+	
 	
 	
 	$sql = '
@@ -476,6 +476,12 @@ function pts_findNextSlot($post,$changePost = False){
 	$recentPosts = $wpdb->get_results($sql);
 	
 	$maxDaysFuture = 5000;
+
+
+	if($pts_debug and True){
+		$msg .= $sql;		
+	}
+
 	
 	
 	
@@ -541,11 +547,12 @@ function pts_findNextSlot($post,$changePost = False){
 		$startSort = $startMinute;	
 		
 		/*
-		if($pts_debug and False){
+		if($pts_debug and True){
 			$msg .= 'DEBUG: $dt = ' . $dt . '<br>';
 			$msg .= 'DEBUG: date("Ymd",$startDate) = ' . date("Ymd",strtotime($startDate)) . '<br>';
 		}
 		*/
+		
 		
 		
 		
@@ -606,18 +613,28 @@ function pts_findNextSlot($post,$changePost = False){
 		}				
 		
 		
-		# if dt is today... publish 3 minute in future!
-		if($dt == date("Ymd",strtotime($startDate))){
+		/*
+		if($pts_debug and False){			
+			$msg .= 'DEBUG: $datetimeCheck = ' . date("Ymd",$datetimeCheck) . '<br>';
+			$msg .= 'date("Ymd",strtotime($startDate)) = ' .  date("Ymd",strtotime($startDate))  . '<br>';
+		}
+		*/
+		
+		
+		# if next date is today... publish 3 minute in future!
+		if(date("Ymd",$datetimeCheck) == date("Ymd",strtotime($startDate))){
 			$minutePublish = $startSort + 3;
 		}
 		
 		$dthrPublish = date("Y-m-d",$datetimeCheck) .' '.  intval($minutePublish/60) .':'. $minutePublish%60;		
 		
 		
+		/*
 		if($pts_debug){
 			# sets the publish time to 1 minute in the future... to test cron!
-			$dthrPublish = date('Y-m-d H:i',strtotime(current_time('mysql', $gmt = 0) . ' + 65 minutes'));						
+			#$dthrPublish = date('Y-m-d H:i',strtotime(current_time('mysql', $gmt = 0) . ' + 65 minutes'));						
 		}
+		*/
 		
 		
 		
