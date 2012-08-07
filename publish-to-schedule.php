@@ -604,6 +604,13 @@ function pts_findNextSlot($post,$changePost = False){
 			#avoid divide by zero on module (%)...
 			$minutePublish += 1;
 		}				
+		
+		
+		# if dt is today... publish 3 minute in future!
+		if($dt == date("Ymd",strtotime($startDate))){
+			$minutePublish = $startSort + 3;
+		}
+		
 		$dthrPublish = date("Y-m-d",$datetimeCheck) .' '.  intval($minutePublish/60) .':'. $minutePublish%60;		
 		
 		
