@@ -7,7 +7,7 @@ Stable tag: trunk
 Donate link: http://www.palpitedigital.com/colabore-donate/
 
 
-Write and not worry about scheduling posts, keeping the periodicity for your readers and not losing time finding out next date to publish. 
+Write and not worry about scheduling posts, keeping the periodicity for your readers and not wast time finding out next date to publish. 
 
 
 == Description ==
