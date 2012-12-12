@@ -2,7 +2,7 @@
 Contributors: alexbenfica,flauius
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
-Tested up to: 3.4.1
+Tested up to: 3.5
 Stable tag: trunk
 Donate link: http://www.palpitedigital.com/colabore-donate/
 
