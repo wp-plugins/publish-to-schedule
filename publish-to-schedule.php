@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 3.1.11
+Version: 3.1.12
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -717,6 +717,13 @@ function pts_do_publish_schedule($post){
 	if($newDate == null){
 		return $post;
 	}
+
+	# do nothing for pages! Should act only on post!
+	if($post->post_type != 'post'){
+		return;
+	}	
+	
+	
 	
 	# changes post_date and pos_date_gmt
 	$post->post_date = $newDate;

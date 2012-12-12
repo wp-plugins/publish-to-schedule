@@ -107,10 +107,11 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 3.1.12 =
+* Pages and menu items was being automatically scheduled too! Now only posts are scheduled as it should be since the beginning!! Thanks "nordlund". 
+
 = 3.1.11 =
-
 * Rarely times a post recently scheduled were not detected and another were scheduled for the same day. Fixed!
-
 
 = 3.1.10 =
 
