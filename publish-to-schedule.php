@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 3.1.12
+Version: 4.0.00
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -332,7 +332,9 @@ function pts_postInfo(){
 	
 	
 	
-	echo '<div class="misc-pub-section misc-pub-section-last">';
+	echo '<div class="misc-pub-section misc-pub-section-last" style="font-size:11px;">';
+	
+	
 	echo '<div style="margin: 0 0 5px 0">';
 	echo '<strong title="'.__('Plugin version','pts').': '.pts_get_version().'">'.$plName.'</strong>';
 	
@@ -387,8 +389,8 @@ function pts_postInfo(){
 			jsCompareTimes();
 		</script>';
 	
-	
 	echo pts_findNextSlot($post);		
+	
 	
 	echo '</div>';
 }
@@ -396,6 +398,41 @@ add_action( 'post_submitbox_misc_actions', 'pts_postInfo' );
 
 
 
+
+
+
+
+
+
+function pts_getMaxPostsDay($datetimeCheck){
+
+	global $options;
+	
+
+	# id day of week is allowed... (replaces <BBB>)
+	$opt = 'pts_'.date('w',$datetimeCheck);
+	
+	/*
+	print_r($datetimeCheck);	
+	print_r($options);
+	print_r($opt);
+	echo '<br>';
+	*/
+	
+	# translate the old style option  no\yes para 0\1+
+	if($options[$opt] == 'no'){
+		return 0;	
+	}
+	if($options[$opt] == 'yes'){
+		return 1;	
+	}
+	if($options[$opt] != ''){
+		return $options[$opt];
+	}
+	else{
+		return 1;
+	}	
+}
 
 
 
@@ -497,30 +534,59 @@ function pts_findNextSlot($post,$changePost = False){
 		$dt = date("Ymd",$datetimeCheck);				
 		$msg .=  '' . date(get_option('date_format'),$datetimeCheck) . ' - <span style="<BBB>"> '.__(date("l",$datetimeCheck),'pts').'</span><CCC><DDD><EEE><br>';
 		
+
+		$maxPostsThisDay = pts_getMaxPostsDay($datetimeCheck);
+		$nPostsDay = 0;
+
+	
 	
 		# if there are no posts in the day...
 		if(count($recentPosts)){
+			
+			
+			
 			$thereArePosts = False;
 			
 			foreach($recentPosts as $rp){
-				if($rp->dtfind == $dt){
-					$thereArePosts = True;					
-					break;
+				
+				if($rp->dtfind == $dt){					
+					$thereArePosts = True;
+					$nPostsDay += 1;
+							
+					
+					# garante o agendamento para hoarios posteriores no mesmo dia.		
+					#$startMinute =  date('H',$rp->post_date) * 60 + date('i',$rp->post_date);
+					#echo date('i',$rp->post_date);
+					#echo $startMinute . '<br>';							
+					
+					#break;
 				}
 			}
-			if($thereArePosts){
+			
+			
+			
+			
+			
+			if($nPostsDay >= $maxPostsThisDay){
+				
 				$msgThereIsPost	= '';
-				$msgThereIsPost .= ' | ' . __('post at ','pts');
-				$msgThereIsPost .= ' ';				
-				$msgThereIsPost .= '<a title="'.__('Edit post',  'pts').' : '.$rp->post_title.
-					'" target="_blank" href="post.php?post='.$rp->ID.'&action=edit">'.
+				
+				if(($nPostsDay == 1) & ($maxPostsThisDay == 1)){		
+					$msgThereIsPost .= ' | ' . __('post at ','pts');
+					$msgThereIsPost .= ' ';				
+					$msgThereIsPost .= '<a title="'.__('Edit post',  'pts').' : '.$rp->post_title.
+						'" target="_blank" href="post.php?post='.$rp->ID.'&action=edit">'.
 					date(get_option('time_format'),strtotime($rp->post_date)).'</a>';
-				
-				$msg = str_replace('<CCC>',$msgThereIsPost,$msg);
-				
+				}
+				else{
+					$msgThereIsPost .= " ($nPostsDay "  . __('of','pts') . ' '. "$maxPostsThisDay)";
+				}
+				 
+				$msg = str_replace('<CCC>',$msgThereIsPost,$msg);				
 				# default style for positive day of week
 				$msg = str_replace('<BBB>',$cssDayAllowed,$msg);				
 				$msg = str_replace('<EEE>','',$msg);
+				
 				continue;
 			}
 			else{
@@ -534,9 +600,10 @@ function pts_findNextSlot($post,$changePost = False){
 	
 
 	
-		# id day of week is allowed... (replaces <BBB>)
-		$opt = 'pts_'.date('w',$datetimeCheck);		
-		if($options[$opt] == 'no'){			
+		
+		
+				
+		if($nPostsDay >= $maxPostsThisDay){			
 			# change style for not allowed
 			$msg = str_replace('<BBB>',$cssDayForbid,$msg);
 			$msg = str_replace('<EEE>','',$msg);
@@ -554,9 +621,11 @@ function pts_findNextSlot($post,$changePost = False){
 		*/
 		
 		
+		$msgDayAvailble = '';
 		
+		$msgDayAvailble .= " (   $nPostsDay  "  . __('of','pts') . ' '. "$maxPostsThisDay ) ";
 		
-		$msgDayAvailble = ' | <strong>' . __('Availble day!','pts') . '</strong>';				
+		$msgDayAvailble .= ' | <strong>' . __('Availble day!','pts') . '</strong>';				
 		
 		# if the day is today... check to see if there is time to publish within the time window configured...
 		if($dt == date("Ymd",strtotime($startDate))){
@@ -621,8 +690,8 @@ function pts_findNextSlot($post,$changePost = False){
 		*/
 		
 		
-		# if next date is today... publish 3 minute in future!
-		if(date("Ymd",$datetimeCheck) == date("Ymd",strtotime($startDate))){
+		# if next date is today... and it is the first post... publish 3 minute in future!
+		if((date("Ymd",$datetimeCheck) == date("Ymd",strtotime($startDate)) & ($nPostsDay == 0))){
 			$minutePublish = $startSort + 3;
 		}
 		
@@ -825,7 +894,6 @@ function pts_options_page(){
 	# insert Google analytics code to monitor plugin usage.
 	add_action('admin_footer', 'pts_insertAnalyticsCode',12);
 	
-
 	
 	$bit = explode("&",$_SERVER['REQUEST_URI']);
 	$url = $bit[0];
@@ -939,71 +1007,76 @@ function pts_options_page(){
 		
 		<h3 style="margin-top:5px;"><?php _e('Which days of week posts are allowed to be auto-scheduled? <br>(The schedule happens only when you click the "Pub. to Schedule" button!)',  'pts')?></h3>
 	
+		<?php _e('Put 0 in a day when you do not want posts to be scheduled!',  'pts')?>
+	
 		<p>
-		<?php _e('Example: if you don\'t choose the Sunday, this plugin will never schedule a post to be published on Sundays. <br> But still, if you want to schedule an article to be published in a Sunday, just schedule it using the standard schedule button of WordPress and it will be published on the date you choose, no matter if the day is selected below!<br>',  'pts')?>
+		<?php _e('Example: if you put 0 on Sunday, this plugin will never schedule a post to be published on Sundays. <br> But still, if you want to schedule an article to be published in a Sunday, just schedule it using the standard schedule button of WordPress and it will be published on the date you choose, ignoring all options below!<br>',  'pts')?>
 		<br>
-		<?php _e('For the days you select, the plugin will schedule only 1 post each day.',  'pts')?>		
+		<?php _e('For each day, set how many posts will be scheduled!',  'pts')?>		
 		</p>
+		
+		
+		
+		
+		<?php				
+			$days = array('sunday','monday','tuesday','wednesday','thursday','friday','saturday');
+			
+			$a = _e('Sunday','pts');
+			$a = _e('Monday','pts');
+			$a = _e('Tuesday','pts');
+			$a = _e('Wednesday','pts');
+			$a = _e('Thursday','pts');
+			$a = _e('Friday','pts');
+			$a = _e('Saturday','pts');
+			
+		?>
+		
 		
 		<table>	
 			
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Sunday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_0" id="sunday" value="yes"<?php if ($options['pts_0'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_0" id="sunday" value="no"<?php if ($options['pts_0'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Monday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_1" id="monday" value="yes"<?php if ($options['pts_1'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_1" id="monday" value="no"<?php if ($options['pts_1'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Tuesday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_2" id="tuesday" value="yes"<?php if ($options['pts_2'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_2" id="tuesday" value="no"<?php if ($options['pts_2'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Wednesday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_3" id="wednesday" value="yes"<?php if ($options['pts_3'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_3" id="wednesday" value="no"<?php if ($options['pts_3'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Thursday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_4" id="thursday" value="yes"<?php if ($options['pts_4'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_4" id="thursday" value="no"<?php if ($options['pts_4'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Friday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_5" id="friday" value="yes"<?php if ($options['pts_5'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_5" id="friday" value="no"<?php if ($options['pts_5'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row" align="left" style="padding:5px;"><?php _e('Saturday', 'pts') ?>:</th>
-				<td style="padding:5px;">
-					<input type="radio" name="pts_6" id="saturday" value="yes"<?php if ($options['pts_6'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-					<input type="radio" name="pts_6" id="saturday" value="no"<?php if ($options['pts_6'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
-				</td>
-			</tr>
+			<?php
+			$iday = 0;
+			foreach($days as $day){
+				#echo $day;
+				
+			?>
+				
+				<tr valign="top">
+					<th scope="row" align="left" style="padding:5px;"><?php _e(ucfirst($day), 'pts') ?>:</th>
+					
+					<td style="padding:5px;">					
+						<input 
+							type="text" 
+							id="<?php echo $day; ?>"
+							name="<?php echo "pts_$iday"; ?>" 
+							value="<?php if ($options["pts_$iday"] == 'no') echo '0'; else if ($options["pts_$iday"] == 'yes') echo '1'; else echo $options["pts_$iday"]; ?>" 
+							style="width: 40px;"/>
+					</td>
+					
+				</tr>
+
+
+			<?php
+				
+				$iday += 1;
+			}
+			
+			?>
+
 		</table>
+		
+		
+		
+
+		
 		
 
 		<h3 style="margin-top:10px;"><?php _e('Specify the time interval in which you want to have your posts scheduled!',  'pts')?></h3>
 		
 		<p>
 		<?php _e('Example: posts will only be scheduled to be published in this time interval.<br> But still, if you do via WordPress schedule button, you can schedule for any time you want!',  'pts')?>
-		</p>		
+		</p>
+		
 		
 		<table class="optiontable">
 			<tr valign="top">
@@ -1016,6 +1089,9 @@ function pts_options_page(){
 				<td><input name="pts_end" type="text" id="end" value="<?php echo $options['pts_end']; ?>" size="10" /><?php _e(' (defaults to 23:59)', 'pts') ?>
 				</td>
 			</tr>
+			
+			
+			
 		</table>
 
 
@@ -1254,6 +1330,22 @@ $options = get_option(basename(__FILE__, ".php"));
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 // Add settings link on plugin page
 function pts_settings_link($links) { 
@@ -1263,10 +1355,7 @@ function pts_settings_link($links) {
 } 
 $plugin = plugin_basename(__FILE__); 
 add_filter("plugin_action_links_$plugin", 'pts_settings_link' );	
-	
 
-
-	
 	
 	
 

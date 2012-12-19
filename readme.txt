@@ -14,7 +14,7 @@ Write and not worry about scheduling posts, keeping the periodicity for your rea
 
 With this plugin you don't need to manually choose the date when a post will be published. After a simple configuration the plugin will schedule your posts when you click publish.
 
-Just configure days of week and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than 1 post per day. 
+Just configure days of week, the number of posts each day and time interval you want posts to be auto scheduled and each post will be automatically scheduled for these days with no more than the number you specified of posts per day. 
 
 It is useful as readers will have articles with maintain some defined periodicity.
 
@@ -101,11 +101,15 @@ Any other languages... you're welcome! Thank you!
 
 == Screenshots ==
 
-1. Configuration to choose which day of week post can be scheduled. Will be only one post each day, unless you decide manually schedule any other for a day that already has a post.
+1. Configuration to choose which day of week post can be scheduled.
 2. Set the period of day in which post may be scheduled. Simple like that.
 3. This is what you'll see while write your post: the date that post will be automatically schedule, and why! To see less information change the related option in the plugin configuration.
 
 == Changelog ==
+
+= 4.0.00 =
+* As requested, now it is possible to choose how many posts will be scheduled each day. 
+
 
 = 3.1.12 =
 * Pages and menu items was being automatically scheduled too! Now only posts are scheduled as it should be since the beginning!! Thanks "nordlund". 
