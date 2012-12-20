@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.00
+Version: 4.0.01
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -1021,6 +1021,7 @@ function pts_options_page(){
 		<?php				
 			$days = array('sunday','monday','tuesday','wednesday','thursday','friday','saturday');
 			
+			/*
 			$a = _e('Sunday','pts');
 			$a = _e('Monday','pts');
 			$a = _e('Tuesday','pts');
@@ -1028,6 +1029,7 @@ function pts_options_page(){
 			$a = _e('Thursday','pts');
 			$a = _e('Friday','pts');
 			$a = _e('Saturday','pts');
+			*/
 			
 		?>
 		
@@ -1177,7 +1179,7 @@ function pts_options_page(){
 					echo '<br/>';
 					_e(' (Might be a lot of text! Good for debugging purposes or enthusiats!)', 'pts'); 
 					 ?>
-					 </input>					
+					 />					
 				</td>
 				
 				<tr valign="top">
@@ -1188,7 +1190,7 @@ function pts_options_page(){
 					echo '<br/>';
 					_e(' Only show the calculated "auto schedule date" for the post!','pts');
 					?>
-					</input>
+					/>
 				</td>
 			</tr>			
 		</table>
@@ -1271,8 +1273,8 @@ function pts_options_page(){
 		?> 
 		
 		<td style="padding:5px;">
-			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="yes"<?php if ($options['pts_allowstats'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?></input>
-			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="no"<?php if ($options['pts_allowstats'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?></input>
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="yes"<?php if ($options['pts_allowstats'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?>/>
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="no"<?php if ($options['pts_allowstats'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?>/>
 		</td>
 		
 				

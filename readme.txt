@@ -107,6 +107,10 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.0.01 =
+* Some little changes on configuration screen.
+
+
 = 4.0.00 =
 * As requested, now it is possible to choose how many posts will be scheduled each day. 
 
