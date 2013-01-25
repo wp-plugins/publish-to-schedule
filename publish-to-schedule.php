@@ -3,7 +3,7 @@
 Plugin Name: Publish to Schedule
 Plugin URI: http://wordpress.org/extend/plugins/publish-to-schedule/ 
 Description: Just write! Let this plugins AUTO-schedule all posts for you! Configure once, use forever!
-Version: 4.0.01
+Version: 4.0.02
 Author: Alex Benfica
 Author URI: http://www.alexbenfica.com/
 License: GPL2 
@@ -1273,8 +1273,8 @@ function pts_options_page(){
 		?> 
 		
 		<td style="padding:5px;">
-			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="yes"<?php if ($options['pts_allowstats'] != 'no') echo ' checked'; ?>><?php _e('Yes', 'pts') ?>/>
-			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="no"<?php if ($options['pts_allowstats'] == 'no') echo ' checked'; ?>><?php _e('No', 'pts') ?>/>
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="yes" <?php if ($options['pts_allowstats'] != 'no') echo ' checked'; ?>/><?php _e('Yes', 'pts') ?>
+			<input type="radio" name="pts_allowstats" id="pts_allowstats" value="no" <?php if ($options['pts_allowstats'] == 'no') echo ' checked'; ?>/><?php _e('No', 'pts') ?>
 		</td>
 		
 				

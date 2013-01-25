@@ -2,7 +2,7 @@
 Contributors: alexbenfica,flauius
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: trunk
 Donate link: http://www.palpitedigital.com/colabore-donate/
 
@@ -107,9 +107,11 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.0.02 =
+* Fixed 1 mistyping on configuration screen.
+
 = 4.0.01 =
 * Some little changes on configuration screen.
-
 
 = 4.0.00 =
 * As requested, now it is possible to choose how many posts will be scheduled each day. 
