@@ -2,7 +2,7 @@
 Contributors: alexbenfica,flauius
 Tags: posts, scheduling, auto schedule, future post, periodicity, postpone, admin, produtivity, publish control, schedule post 
 Requires at least: 2.8
-Tested up to: 4.0.1
+Tested up to: 3.8
 Stable tag: trunk
 Donate link: http://www.palpitedigital.com/colabore-donate/
 
@@ -107,18 +107,12 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
-= 4.0.03 =
-* Tested up to WordPress 4.0.1
-
-= 4.0.02 =
-* Fixed 1 mistyping on configuration screen.
-
 = 4.0.01 =
-* Some little changes on configuration screen.
+* Tested up to WordPress 3.8 
+
 
 = 4.0.00 =
 * As requested, now it is possible to choose how many posts will be scheduled each day. 
-
 
 = 3.1.12 =
 * Pages and menu items was being automatically scheduled too! Now only posts are scheduled as it should be since the beginning!! Thanks "nordlund". 
