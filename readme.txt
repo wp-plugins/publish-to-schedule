@@ -107,6 +107,9 @@ Any other languages... you're welcome! Thank you!
 
 == Changelog ==
 
+= 4.0.03 =
+* Tested up to WordPress 4.0.1
+
 = 4.0.02 =
 * Fixed 1 mistyping on configuration screen.
 
